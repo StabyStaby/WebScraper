@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title  %}User {% endblock %}
+{% block content %} 
+<form method='POST' >
+    <div class="form-group row">
+        <div class="col-xs-2">
+          <label for="user">User</label>
+          <input class="form-control" name="user" id="user" type="text">
+        </div>
+        <div class="col-xs-2">
+          <label for="discordId">Discord Id</label>
+          <input class="form-control" name="discordId" id="discordId" type="text">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Add User</button>
+</form>
+{% endblock %}

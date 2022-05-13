@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title  %}Manga {% endblock %}
+{% block content %} 
+<form method="POST" >
+  {%if user%}
+    <h1>User : {{user.name}}</h1>
+    {%endif%}
+    <select id = "select" class="form-select" aria-label="Default select example" name="select" onChange="changeUser()">
+        <option value="" selected disabled>Please select</option>
+        {%for user in users%}
+        <option  value="{{user.name}}" name = "{{user.name}}">{{user.name}}</option>
+        {%endfor%}
+      </select>
+    <div class="form-group row">
+        <div class="col-xs-2">
+          <label for="manga">Manga</label>
+          <input class="form-control" name="manga" id="manga" type="text">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Manga</button>
+    
+</form>
+<div>
+{%if user%}
+<ul title="{{user}}">
+{% for manga in user.manga %}
+<li class="list-group-item">{{manga.name}}
+  <span>{{manga.lastChapterDate}}</span>
+  <!-- <img src = "{{manga.imgUrl}}"> -->
+  <button type="button" class="close" onClick="deletManga({{ manga.id }})">
+      <span aria-hidden="true">&times;</span>
+  </button>
+</li>
+{%endfor%}
+</ul>
+{%endif%}
+</div>
+{% endblock %}

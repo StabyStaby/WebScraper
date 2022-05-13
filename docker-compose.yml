@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  webscraper:
+    image: webscraper
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 90:90
