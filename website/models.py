@@ -11,7 +11,9 @@ class Manga(db.Model):
     userId = db.Column(db.Integer,db.ForeignKey('user.id'))
 
 class User(db.Model):
+    __table_args__=(db.UniqueConstraint('discordId'), )
     id = db.Column(db.Integer,primary_key = True)
-    discordId = db.Column(db.Integer)
+    discordId = db.Column(db.Integer,)
     name = db.Column(db.String(200))
     manga = db.relationship('Manga')
+    webhook = db.Column(db.String(400))

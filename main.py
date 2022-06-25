@@ -9,6 +9,7 @@ from website import db
 import json,time
 
 def schedule():
+    print("monakS")
     with app.app_context():
         users = User.query.all()
         for user in users:
@@ -27,7 +28,7 @@ def schedule():
                     manga.nrOfChapetrs = nr
                     db.session.commit()
                     data = {"content":"New manga BITCH <@"+str(user.discordId)+"> "+manga.name,"embeds":[{"title":manga.name,"url":scrap[2],"fields":[{"name":"Nr of chapters realeased","value":nrChapters}],"image":{"url":manga.imgUrl}}]}
-                    x = requests.post(url='https://discord.com/api/webhooks/971088379783557181/JOyYTFkJHCYf-xwUxWOga_xzvaGgSeQ4ADNxsybUkO08rkU719Do0k_7a_Cy37U-8Q6q',json=data)
+                    x = requests.post(url=user.webhook,json=data)
                     print(x.reason)
             print(f"Done with {user.name}'s manga")
         print("~~~~~~~")
@@ -39,6 +40,8 @@ scheduler.add_job(id = 'Test', func=schedule, trigger='interval', minutes = 5)
 scheduler.start()
 
 if __name__ == '__main__':
+    print("WTFF")
     app.run()
+    print("aleksa a bitch")
     
 

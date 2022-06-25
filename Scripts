@@ -1,0 +1,2 @@
+ # Build image for arm64 linux and push to hub
+ docker buildx build --platform linux/arm64 -t andreineagu9/webscraper-arm-v2 --push . 

@@ -1,3 +1,4 @@
+import sqlite3
 from flask import Blueprint, jsonify, render_template, request,flash, url_for,redirect
 from website.scrape import scrapeName,scrapeForLastDate
 from . import db
@@ -12,11 +13,16 @@ def home():
     if request.method == 'POST':
         name = request.form.get('user')
         discordId = request.form.get('discordId')
+        webhook = request.form.get('webhook')
         if name and discordId :
-            new_user = User(name=name,discordId=discordId)
-            print(new_user.name)
-            db.session.add(new_user)
-            db.session.commit()
+            try:
+                new_user = User(name=name,discordId=discordId,webhook=webhook)
+                print(new_user.name)
+                db.session.add(new_user)
+                db.session.commit()
+            except:
+                flash(message='User already is already in',category='error')
+                return render_template("home.html",methods=['GET','POST'])
         else :
             flash(message='Empty user',category='error')
         return render_template("home.html",methods=['GET','POST'])
