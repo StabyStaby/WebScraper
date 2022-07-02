@@ -18,4 +18,10 @@
     </div>
     <button type="submit" class="btn btn-primary">Add User</button>
 </form>
+
+<ul title="Users">
+{%for user in users%}
+<li class="list-group-item">{{user.name}}</li>
+{%endfor%}
+</ul>
 {% endblock %}

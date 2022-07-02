@@ -141,3 +141,25 @@ def scrapeManga(url):
     print(f"\n{manga.imgUrl} \n {manga.lastChapterDate} \n {manga.name} \n {manga.nrOfChapters} \n {manga.url}\n")
     return manga
 
+def scrapeHome(u):
+    manganato = 'https://manganato.com/'
+    mangadex = 'https://mangatx.com/'
+    manganatoList = getMangaList(u,manganato)
+    mangadexList = getMangaList(u,mangadex)
+    htmlTextManganato = requests.get(manganato).text
+    htmlTextMangadex = requests.get(mangadex).text
+    manganatoSoup = BeautifulSoup(htmlTextManganato,"lxml")
+    mangadexSoup = BeautifulSoup(htmlTextMangadex,"lxml")
+    allManganato = manganatoSoup.find_all('a',class_ = 'tooltip item-img')
+    for manga in allManganato:
+        if manga['href'] in manganatoList:
+            scrapeManga(manga['href'])
+        
+        
+        
+def getMangaList(user,site):
+    mangaList = []
+    for manga in user.manga:
+        if site in manga.url:
+            mangaList.append(manga.url)
+    return mangaList

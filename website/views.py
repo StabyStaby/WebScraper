@@ -22,12 +22,12 @@ def home():
                 db.session.commit()
             except:
                 flash(message='User already is already in',category='error')
-                return render_template("home.html",methods=['GET','POST'])
+                return render_template("user.html",methods=['GET','POST'])
         else :
             flash(message='Empty user',category='error')
-        return render_template("home.html",methods=['GET','POST'])
+        return render_template("user.html",methods=['GET','POST'])
    
-    return render_template("home.html",methods=['GET','POST'])
+    return render_template("user.html",methods=['GET','POST'])
 
 @views.route('/manga',methods=['GET','POST'])
 def notifications():
@@ -40,23 +40,23 @@ def notifications():
         for manga in mangas:
             if url in manga.url:
                 flash('Manga already in the list',category='error')
-                return render_template("notifications.html",methods=['GET','POST'],users=users,user=id,manga=mangas)
+                return render_template("manga.html",methods=['GET','POST'],users=users,user=id,manga=mangas)
         manga = scrapeManga(url=url)
         manga.userId = id.id
         db.session.add(manga)
         db.session.commit()
         print(manga.imgUrl)
-        return render_template("notifications.html",methods=['GET','POST'],users=users,user=id,manga=mangas)
+        return render_template("manga.html",methods=['GET','POST'],users=users,user=id,manga=mangas)
     elif request.method == 'GET':
         users = User.query.all()
         user = request.args.get('user')
         if user:
             id = User.query.filter_by(name=user).first()
             mangas = id.manga
-            return render_template("notifications.html",methods=['GET','POST'],users=users,user=id,manga=mangas)
-        return render_template("notifications.html",methods=['GET','POST'],users=users,user=user)
+            return render_template("manga.html",methods=['GET','POST'],users=users,user=id,manga=mangas)
+        return render_template("manga.html",methods=['GET','POST'],users=users,user=user)
         
-    return render_template("notifications.html",methods=['GET','POST'])
+    return render_template("manga.html",methods=['GET','POST'])
 
 @views.route('/changeUser', methods=['POST'])
 def changeUser():

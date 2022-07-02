@@ -22,7 +22,7 @@
 </form>
 <div>
 {%if user%}
-<ul title="{{user}}">
+<ul title="{{user.name}}">
 {% for manga in user.manga %}
 <li class="list-group-item">{{manga.name}}
   <span>{{manga.lastChapterDate}}</span>
