@@ -1,2 +1,5 @@
- # Build image for arm64 linux and push to hub
- docker buildx build --platform linux/arm64 -t andreineagu9/webscraper-arm-v2 --push . 
+# Build image for arm64 linux and push to hub
+docker buildx build --platform linux/arm64 -t andreineagu9/webscraper-arm-v2 --push . 
+
+#Launch command for raspbery 
+sudo docker run -p 80:80 -d ID_OF_IMAGE
